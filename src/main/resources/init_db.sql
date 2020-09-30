@@ -1,0 +1,1 @@
+CREATE SCHEMA `hibernate_cinema` DEFAULT CHARACTER SET utf8 ;
