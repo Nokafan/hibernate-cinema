@@ -14,20 +14,19 @@ import lombok.ToString;
 
 @Getter
 @Setter
-@EqualsAndHashCode(of = "title")
-@ToString(of = {"title", "description"})
 @NoArgsConstructor
+@EqualsAndHashCode
+@ToString
 
 @Entity
-@Table(name = "movies")
-public class Movie {
+@Table(name = "cinema_halls")
+public class CinemaHall {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "movie_id")
     private Long id;
 
-    @Column(nullable = false, unique = true)
-    private String title;
+    @Column(nullable = false)
+    private Long capacity;
 
     @Column
     private String description;
