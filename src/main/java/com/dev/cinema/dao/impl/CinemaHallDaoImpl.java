@@ -8,30 +8,13 @@ import com.dev.cinema.util.HibernateUtil;
 import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 
 @Dao
-public class CinemaHallDaoImpl implements CinemaHallDao {
+public class CinemaHallDaoImpl extends GenericDaoImpl<CinemaHall> implements CinemaHallDao {
 
     @Override
     public CinemaHall add(CinemaHall cinemaHall) {
-        Transaction transaction = null;
-        Session session = null;
-        try {
-            session = HibernateUtil.getSessionFactory().openSession();
-            transaction = session.beginTransaction();
-            session.persist(cinemaHall);
-            return cinemaHall;
-        } catch (HibernateException e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
-            throw new DataProcessingExeption("Couldn't insert " + cinemaHall.toString(), e);
-        } finally {
-            if (session != null) {
-                session.close();
-            }
-        }
+        return super.add(cinemaHall);
     }
 
     @Override
