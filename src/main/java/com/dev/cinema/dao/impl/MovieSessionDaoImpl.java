@@ -7,15 +7,12 @@ import com.dev.cinema.util.HibernateUtil;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
-import lombok.extern.log4j.Log4j;
 import org.hibernate.Session;
 
-@Log4j
 @Dao
 public class MovieSessionDaoImpl extends GenericDaoImpl<MovieSession> implements MovieSessionDao {
     @Override
     public List<MovieSession> findAvailableSessions(Long movieId, LocalDate date) {
-        log.info("--- findAvailableSessions ---");
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             return session.createQuery(
                     "FROM MovieSession ms "

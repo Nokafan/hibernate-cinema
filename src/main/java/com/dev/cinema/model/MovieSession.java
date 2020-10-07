@@ -20,7 +20,6 @@ import lombok.ToString;
 @NoArgsConstructor
 @EqualsAndHashCode
 @ToString
-
 @Entity
 @Table(name = "movie_sessions")
 public class MovieSession {
@@ -29,13 +28,13 @@ public class MovieSession {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "ms_movie_id")
+    @JoinColumn(name = "movie_id")
     private Movie movie;
 
     @ManyToOne
-    @JoinColumn(name = "ms_cinema_hall_id")
+    @JoinColumn(name = "cinema_hall_id")
     private CinemaHall cinemaHall;
 
-    @Column(name = "ms_time", nullable = false)
+    @Column(name = "time", nullable = false)
     private LocalDateTime time;
 }

@@ -17,7 +17,6 @@ import lombok.ToString;
 @EqualsAndHashCode
 @ToString
 @NoArgsConstructor
-
 @Entity
 @Table(name = "movies")
 public class Movie {
