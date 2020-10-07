@@ -7,19 +7,22 @@ import com.dev.cinema.util.HibernateUtil;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
+import lombok.extern.log4j.Log4j;
 import org.hibernate.Session;
 
+@Log4j
 @Dao
 public class MovieSessionDaoImpl extends GenericDaoImpl<MovieSession> implements MovieSessionDao {
-
     @Override
     public List<MovieSession> findAvailableSessions(Long movieId, LocalDate date) {
+        log.info("--- findAvailableSessions ---");
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             return session.createQuery(
-                    "FROM MovieSession AS ms "
-                            + "WHERE movie_movie_id = :movieId "
-                            + "AND ms.time BETWEEN :beginTime AND :endTime",
-                    MovieSession.class)
+                    "FROM MovieSession ms "
+                            + "LEFT JOIN FETCH ms.movie "
+                            + "LEFT JOIN FETCH ms.cinemaHall "
+                            + "WHERE ms.movie.id = :movieId "
+                            + "AND ms.time BETWEEN :beginTime AND :endTime", MovieSession.class)
                     .setParameter("movieId", movieId)
                     .setParameter("beginTime", date.atTime(LocalTime.MIN))
                     .setParameter("endTime", date.atTime(LocalTime.MAX))

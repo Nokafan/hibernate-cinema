@@ -14,8 +14,8 @@ import lombok.ToString;
 
 @Getter
 @Setter
-@EqualsAndHashCode(of = "title")
-@ToString(of = {"title", "description"})
+@EqualsAndHashCode
+@ToString
 @NoArgsConstructor
 
 @Entity

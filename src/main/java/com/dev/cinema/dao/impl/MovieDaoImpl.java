@@ -11,7 +11,6 @@ import org.hibernate.query.Query;
 
 @Dao
 public class MovieDaoImpl extends GenericDaoImpl<Movie> implements MovieDao {
-
     @Override
     public Movie add(Movie movie) {
         return super.add(movie);

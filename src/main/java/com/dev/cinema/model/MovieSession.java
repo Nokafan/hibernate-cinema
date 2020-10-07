@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import lombok.EqualsAndHashCode;
@@ -28,11 +29,13 @@ public class MovieSession {
     private Long id;
 
     @ManyToOne
+    @JoinColumn(name = "ms_movie_id")
     private Movie movie;
 
     @ManyToOne
+    @JoinColumn(name = "ms_cinema_hall_id")
     private CinemaHall cinemaHall;
 
-    @Column(nullable = false)
+    @Column(name = "ms_time", nullable = false)
     private LocalDateTime time;
 }

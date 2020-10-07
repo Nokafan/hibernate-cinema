@@ -17,7 +17,6 @@ import lombok.ToString;
 @NoArgsConstructor
 @EqualsAndHashCode
 @ToString
-
 @Entity
 @Table(name = "cinema_halls")
 public class CinemaHall {
@@ -27,7 +26,5 @@ public class CinemaHall {
 
     @Column(nullable = false)
     private Long capacity;
-
-    @Column
     private String description;
 }
