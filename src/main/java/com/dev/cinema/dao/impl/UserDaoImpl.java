@@ -1,10 +1,12 @@
 package com.dev.cinema.dao.impl;
 
 import com.dev.cinema.dao.UserDao;
+import com.dev.cinema.exeption.DataProcessingExeption;
 import com.dev.cinema.lib.Dao;
 import com.dev.cinema.model.User;
 import com.dev.cinema.util.HibernateUtil;
 import java.util.Optional;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 
 @Dao
@@ -17,6 +19,8 @@ public class UserDaoImpl extends GenericDaoImpl<User> implements UserDao {
                             + "WHERE u.email = :email", User.class)
                     .setParameter("email", email)
                     .uniqueResultOptional();
+        } catch (HibernateException e) {
+            throw new DataProcessingExeption("Faild to get user email = " + email, e);
         }
     }
 

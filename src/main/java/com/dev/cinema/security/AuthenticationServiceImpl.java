@@ -11,7 +11,7 @@ import java.util.Optional;
 @Service
 public class AuthenticationServiceImpl implements AuthenticationService {
     @Inject
-    UserService userService;
+    private UserService userService;
 
     @Override
     public User login(String email, String password) throws AuthenticationException {
@@ -24,8 +24,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     @Override
     public User register(String email, String password) {
-        if (email != null && password != null
-                && !email.isEmpty() && !password.isEmpty()) {
+        if (!email.isEmpty() && !password.isEmpty()) {
             User user = new User();
             user.setEmail(email);
             user.setPassword(password);
