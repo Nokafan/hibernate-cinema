@@ -21,7 +21,7 @@ public abstract class GenericDaoImpl<T> implements GenericDao<T> {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new DataProcessingExeption("Can't insert entity" + entity.toString(), e);
+            throw new DataProcessingExeption("Can't insert entity " + entity.toString(), e);
         } finally {
             if (session != null) {
                 session.close();

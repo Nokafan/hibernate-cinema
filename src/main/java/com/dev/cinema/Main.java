@@ -4,6 +4,8 @@ import com.dev.cinema.lib.Injector;
 import com.dev.cinema.model.CinemaHall;
 import com.dev.cinema.model.Movie;
 import com.dev.cinema.model.MovieSession;
+import com.dev.cinema.model.User;
+import com.dev.cinema.security.AuthenticationService;
 import com.dev.cinema.service.CinemaHallService;
 import com.dev.cinema.service.MovieService;
 import com.dev.cinema.service.MovieSessionService;
@@ -77,5 +79,20 @@ public class Main {
                 .forEach(System.out::println);
 
         movieService.getAll().forEach(System.out::println);
+
+        AuthenticationService authenticationService =
+                (AuthenticationService) injector.getInstance(AuthenticationService.class);
+        User userOne = authenticationService.register("userOne@ukr.net", "1234");
+        User userTwo = authenticationService.register("userTwo@ukr.net", "1234");
+        User userThree = authenticationService.register("", "1234");
+
+        User userOneLogged = authenticationService.login("userOne@ukr.net", "1234");
+        User userTwoLogged = authenticationService.login("userTwo@ukr.net", "1234");
+
+        System.out.println(userOne);
+        System.out.println(userTwo);
+        System.out.println(userOne.equals(userOneLogged));
+        System.out.println(userTwo.equals(userTwoLogged));
+
     }
 }
