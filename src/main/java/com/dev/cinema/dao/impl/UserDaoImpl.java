@@ -20,7 +20,7 @@ public class UserDaoImpl extends GenericDaoImpl<User> implements UserDao {
                     .setParameter("email", email)
                     .uniqueResultOptional();
         } catch (HibernateException e) {
-            throw new DataProcessingExeption("Faild to get user email = " + email, e);
+            throw new DataProcessingExeption("Faild to get user with email = " + email, e);
         }
     }
 
