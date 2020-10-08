@@ -6,16 +6,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
 
-@Getter
-@Setter
-@EqualsAndHashCode
-@ToString
+@Data
 @NoArgsConstructor
 @Entity
 @Table(name = "movies")
@@ -25,9 +19,9 @@ public class Movie {
     @Column(name = "movie_id")
     private Long id;
 
-    @Column(nullable = false, unique = true)
+    @Column(name = "movie_title", nullable = false, unique = true)
     private String title;
 
-    @Column
+    @Column(name = "movie_description")
     private String description;
 }

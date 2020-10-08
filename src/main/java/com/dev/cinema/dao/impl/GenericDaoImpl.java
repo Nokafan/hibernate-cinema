@@ -14,7 +14,7 @@ public abstract class GenericDaoImpl<T> implements GenericDao<T> {
         try {
             session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
-            session.persist(entity);
+            session.save(entity);
             transaction.commit();
             return entity;
         } catch (Exception e) {
