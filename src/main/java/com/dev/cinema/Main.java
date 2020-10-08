@@ -1,9 +1,12 @@
 package com.dev.cinema;
 
+import com.dev.cinema.exeption.AuthenticationException;
 import com.dev.cinema.lib.Injector;
 import com.dev.cinema.model.CinemaHall;
 import com.dev.cinema.model.Movie;
 import com.dev.cinema.model.MovieSession;
+import com.dev.cinema.model.User;
+import com.dev.cinema.security.AuthenticationService;
 import com.dev.cinema.service.CinemaHallService;
 import com.dev.cinema.service.MovieService;
 import com.dev.cinema.service.MovieSessionService;
@@ -77,5 +80,26 @@ public class Main {
                 .forEach(System.out::println);
 
         movieService.getAll().forEach(System.out::println);
+
+        AuthenticationService authenticationService =
+                (AuthenticationService) injector.getInstance(AuthenticationService.class);
+        User userOne = authenticationService.register("userOne@ukr.net", "1234");
+        User userTwo = authenticationService.register("userTwo@ukr.net", "1234");
+        User userThree = authenticationService.register("", "1234");
+
+        User userOneLogged = null;
+        User userTwoLogged = null;
+        try {
+            userOneLogged = authenticationService.login("userOne@ukr.net", "1234");
+            userTwoLogged = authenticationService.login("userTwo@ukr.net", "1234");
+        } catch (AuthenticationException e) {
+            e.getMessage();
+        }
+
+        System.out.println(userOne);
+        System.out.println(userTwo);
+        System.out.println(userOne.equals(userOneLogged));
+        System.out.println(userTwo.equals(userTwoLogged));
+
     }
 }
