@@ -31,9 +31,9 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         User user = new User();
         user.setEmail(email);
         user.setPassword(password);
-        User dbUser = userService.add(user);
-        cartService.registerNewShoppingCart(dbUser);
-        return dbUser;
+        user = userService.add(user);
+        cartService.registerNewShoppingCart(user);
+        return user;
     }
 
     private boolean idPasswordValid(User user, String password) {

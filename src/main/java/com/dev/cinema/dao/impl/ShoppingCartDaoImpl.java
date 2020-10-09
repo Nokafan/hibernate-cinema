@@ -22,12 +22,13 @@ public class ShoppingCartDaoImpl extends GenericDaoImpl<ShoppingCart> implements
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             return session.createQuery("FROM ShoppingCart sc "
                     + "LEFT JOIN FETCH sc.tickets "
-                    + "LEFT JOIN FETCH sc.user "
+                    + "JOIN FETCH sc.user "
                     + "WHERE sc.user = :user", ShoppingCart.class)
                     .setParameter("user", user)
                     .uniqueResult();
         } catch (HibernateException e) {
-            throw new DataProcessingExeption("Couldn't get shopping cart id=" + user.getId(), e);
+            throw new DataProcessingExeption("Couldn't get shopping cart by user id="
+                    + user.getId(), e);
         }
     }
 
@@ -43,6 +44,10 @@ public class ShoppingCartDaoImpl extends GenericDaoImpl<ShoppingCart> implements
         } catch (HibernateException e) {
             throw new DataProcessingExeption("Couldn't update cart with id="
                     + shoppingCart.getId(), e);
+        } finally {
+            if (session != null) {
+                session.close();
+            }
         }
     }
 }

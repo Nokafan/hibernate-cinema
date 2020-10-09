@@ -104,6 +104,7 @@ public class Main {
         ShoppingCartService cartService =
                 (ShoppingCartService) injector.getInstance(ShoppingCartService.class);
         cartService.addSession(movieSessionFirst, userOne);
+        cartService.addSession(movieSessionFirst, userOne);
         cartService.addSession(movieSessionTwo, userOne);
         cartService.addSession(movieSessionThree, userTwo);
         cartService.addSession(movieSessionFirst, userTwo);
