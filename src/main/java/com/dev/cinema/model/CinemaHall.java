@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 public class CinemaHall {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "hall_id")
+    @Column(name = "id")
     private Long id;
 
     @Column(name = "hall_capacity", nullable = false)

@@ -1,6 +1,7 @@
 package com.dev.cinema.model;
 
 import java.util.List;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -17,10 +18,11 @@ import lombok.NoArgsConstructor;
 @Table(name = "shopping_carts")
 public class ShoppingCart {
     @Id
+    @Column(name = "cart_id")
     private Long id;
 
     @ManyToMany
-    @JoinColumn(name = "ticket_id")
+    @JoinColumn(name = "tickets_id")
     private List<Ticket> tickets;
 
     @OneToOne
