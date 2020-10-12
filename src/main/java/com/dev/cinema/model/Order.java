@@ -8,8 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,7 +24,7 @@ public class Order {
     @Column(name = "order_id")
     private Long id;
 
-    @ManyToMany
+    @OneToMany
     @JoinColumn(name = "ticket_id")
     private List<Ticket> tickets;
 

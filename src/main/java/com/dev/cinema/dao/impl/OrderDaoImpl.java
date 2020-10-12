@@ -22,7 +22,7 @@ public class OrderDaoImpl extends GenericDaoImpl<Order> implements OrderDao {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             return session.createQuery(
                     "SELECT DISTINCT o FROM Order o "
-                            + "LEFT JOIN FETCH o.tiсkets "
+                            + "JOIN FETCH o.tickets "
                             + "JOIN FETCH o.user "
                             + "WHERE o.user = :user", Order.class)
                     .setParameter("user", user)

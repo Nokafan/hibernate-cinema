@@ -117,6 +117,8 @@ public class Main {
         orderService.completeOrder(cartService.getByUser(userOne).getTickets(), userOne);
         orderService.completeOrder(cartService.getByUser(userTwo).getTickets(), userTwo);
         cartService.addSession(movieSessionFirst, userOne);
+        cartService.addSession(movieSessionFirst, userOne);
+        cartService.addSession(movieSessionFirst, userOne);
 
         orderService.getOrderHistory(userOne).forEach(System.out::println);
         orderService.getOrderHistory(userTwo).forEach(System.out::println);
