@@ -5,29 +5,27 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 @Data
 @NoArgsConstructor
 @Entity
-@Table(name = "users")
-public class User {
+@Table(name = "tickets")
+public class Ticket {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id")
+    @Column(name = "ticket_id")
     private Long id;
 
-    @Column(name = "email", nullable = false, unique = true)
-    private String email;
+    @ManyToOne
+    @JoinColumn(name = "session_id")
+    private MovieSession movieSession;
 
-    @ToString.Exclude
-    @Column(name = "password", nullable = false)
-    private String password;
-
-    @ToString.Exclude
-    @Column(name = "salt")
-    private byte[] salt;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 }

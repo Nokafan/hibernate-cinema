@@ -10,6 +10,7 @@ import com.dev.cinema.security.AuthenticationService;
 import com.dev.cinema.service.CinemaHallService;
 import com.dev.cinema.service.MovieService;
 import com.dev.cinema.service.MovieSessionService;
+import com.dev.cinema.service.ShoppingCartService;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -85,7 +86,6 @@ public class Main {
                 (AuthenticationService) injector.getInstance(AuthenticationService.class);
         User userOne = authenticationService.register("userOne@ukr.net", "1234");
         User userTwo = authenticationService.register("userTwo@ukr.net", "1234");
-        User userThree = authenticationService.register("", "1234");
 
         User userOneLogged = null;
         User userTwoLogged = null;
@@ -101,5 +101,15 @@ public class Main {
         System.out.println(userOne.equals(userOneLogged));
         System.out.println(userTwo.equals(userTwoLogged));
 
+        ShoppingCartService cartService =
+                (ShoppingCartService) injector.getInstance(ShoppingCartService.class);
+        cartService.addSession(movieSessionFirst, userOne);
+        cartService.addSession(movieSessionFirst, userOne);
+        cartService.addSession(movieSessionTwo, userOne);
+        cartService.addSession(movieSessionThree, userTwo);
+        cartService.addSession(movieSessionFirst, userTwo);
+
+        System.out.println(cartService.getByUser(userOne));
+        System.out.println(cartService.getByUser(userTwo));
     }
 }
