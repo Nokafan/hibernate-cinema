@@ -7,7 +7,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,7 +21,7 @@ public class Ticket {
     @Column(name = "ticket_id")
     private Long id;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "session_id")
     private MovieSession movieSession;
 
