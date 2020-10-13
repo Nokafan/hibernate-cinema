@@ -23,7 +23,6 @@ public class OrderDaoImpl extends GenericDaoImpl<Order> implements OrderDao {
             return session.createQuery(
                     "SELECT DISTINCT o FROM Order o "
                             + "JOIN FETCH o.tickets "
-                            + "JOIN FETCH o.user "
                             + "WHERE o.user = :user", Order.class)
                     .setParameter("user", user)
                     .getResultList();
