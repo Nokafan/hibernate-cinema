@@ -6,13 +6,16 @@ import com.dev.cinema.lib.Dao;
 import com.dev.cinema.model.User;
 import com.dev.cinema.util.HibernateUtil;
 import java.util.Optional;
+import lombok.extern.log4j.Log4j;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 
+@Log4j
 @Dao
 public class UserDaoImpl extends GenericDaoImpl<User> implements UserDao {
     @Override
     public Optional<User> findByEmail(String email) {
+        log.info("Calling method findByEmail() from UserDaoImpl");
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             return session.createQuery(
                     "FROM User u "

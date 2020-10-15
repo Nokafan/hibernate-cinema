@@ -6,9 +6,11 @@ import com.dev.cinema.lib.Dao;
 import com.dev.cinema.model.CinemaHall;
 import com.dev.cinema.util.HibernateUtil;
 import java.util.List;
+import lombok.extern.log4j.Log4j;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 
+@Log4j
 @Dao
 public class CinemaHallDaoImpl extends GenericDaoImpl<CinemaHall> implements CinemaHallDao {
 
@@ -19,6 +21,7 @@ public class CinemaHallDaoImpl extends GenericDaoImpl<CinemaHall> implements Cin
 
     @Override
     public List<CinemaHall> getAll() {
+        log.info("Calling method getAll() at CinemaHallDaoImp");
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             return session.createQuery("from CinemaHall", CinemaHall.class).getResultList();
         } catch (HibernateException e) {

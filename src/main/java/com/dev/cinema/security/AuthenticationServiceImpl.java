@@ -8,7 +8,9 @@ import com.dev.cinema.service.ShoppingCartService;
 import com.dev.cinema.service.UserService;
 import com.dev.cinema.util.HashUtil;
 import java.util.Optional;
+import lombok.extern.log4j.Log4j;
 
+@Log4j
 @Service
 public class AuthenticationServiceImpl implements AuthenticationService {
     @Inject
@@ -33,6 +35,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         user.setPassword(password);
         user = userService.add(user);
         cartService.registerNewShoppingCart(user);
+        log.info("Registered user for email " + email);
         return user;
     }
 

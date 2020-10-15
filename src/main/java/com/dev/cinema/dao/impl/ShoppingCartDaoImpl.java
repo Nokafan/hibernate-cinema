@@ -6,10 +6,12 @@ import com.dev.cinema.lib.Dao;
 import com.dev.cinema.model.ShoppingCart;
 import com.dev.cinema.model.User;
 import com.dev.cinema.util.HibernateUtil;
+import lombok.extern.log4j.Log4j;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+@Log4j
 @Dao
 public class ShoppingCartDaoImpl extends GenericDaoImpl<ShoppingCart> implements ShoppingCartDao {
     @Override
@@ -19,6 +21,7 @@ public class ShoppingCartDaoImpl extends GenericDaoImpl<ShoppingCart> implements
 
     @Override
     public ShoppingCart getByUser(User user) {
+        log.info("Calling method getByUser() from ShoppingCartDaoImpl");
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             return session.createQuery("FROM ShoppingCart sc "
                     + "LEFT JOIN FETCH sc.tickets "
@@ -34,6 +37,7 @@ public class ShoppingCartDaoImpl extends GenericDaoImpl<ShoppingCart> implements
 
     @Override
     public void update(ShoppingCart shoppingCart) {
+        log.info("Calling method update() from ShoppingCartDaoImpl for " + shoppingCart);
         Transaction transaction = null;
         Session session = null;
         try {
@@ -42,6 +46,9 @@ public class ShoppingCartDaoImpl extends GenericDaoImpl<ShoppingCart> implements
             session.update(shoppingCart);
             transaction.commit();
         } catch (HibernateException e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
             throw new DataProcessingExeption("Couldn't update cart with id="
                     + shoppingCart.getId(), e);
         } finally {

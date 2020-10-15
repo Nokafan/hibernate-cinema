@@ -17,7 +17,9 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import lombok.extern.log4j.Log4j;
 
+@Log4j
 public class Main {
     private static Injector injector = Injector.getInstance("com.dev.cinema");
 
@@ -39,7 +41,7 @@ public class Main {
         movieThree.setDescription("Cool movie");
         movieService.add(movieThree);
 
-        movieService.getAll().forEach(System.out::println);
+        log.info("Get all movies " + movieService.getAll());
 
         CinemaHallService cinemaHallService
                 = (CinemaHallService) injector.getInstance(CinemaHallService.class);
@@ -54,7 +56,7 @@ public class Main {
         cinemaHallTwo.setCapacity(232L);
         cinemaHallService.add(cinemaHallTwo);
 
-        cinemaHallService.getAll().forEach(System.out::println);
+        log.info("Get all cinemaHallService " + cinemaHallService.getAll());
 
         MovieSession movieSessionFirst = new MovieSession();
         movieSessionFirst.setCinemaHall(cinemaHallOne);
@@ -78,13 +80,12 @@ public class Main {
         movieSessionService.add(movieSessionTwo);
         movieSessionService.add(movieSessionThree);
 
-        movieSessionService.findAvailableSessions(1L, LocalDate.of(2020, 11, 11))
-                .forEach(System.out::println);
+        log.info("Find availible session " 
+                + movieSessionService.findAvailableSessions(1L, LocalDate.of(2020, 11, 11)));
+        log.info("Find availible session " 
+                + movieSessionService.findAvailableSessions(2L, LocalDate.of(2020, 10, 11)));
 
-        movieSessionService.findAvailableSessions(2L, LocalDate.of(2020, 10, 11))
-                .forEach(System.out::println);
-
-        movieService.getAll().forEach(System.out::println);
+        log.info("Get all movies " + movieService.getAll());
 
         AuthenticationService authenticationService =
                 (AuthenticationService) injector.getInstance(AuthenticationService.class);
@@ -97,13 +98,13 @@ public class Main {
             userOneLogged = authenticationService.login("userOne@ukr.net", "1234");
             userTwoLogged = authenticationService.login("userTwo@ukr.net", "1234");
         } catch (AuthenticationException e) {
-            e.getMessage();
+            log.warn("Incorrect username or password " + e.getMessage());
         }
 
-        System.out.println(userOne);
-        System.out.println(userTwo);
-        System.out.println(userOne.equals(userOneLogged));
-        System.out.println(userTwo.equals(userTwoLogged));
+        log.info("userOne = " + userOne);
+        log.info(userTwo);
+        log.info(userOne.equals(userOneLogged));
+        log.info(userTwo.equals(userTwoLogged));
 
         ShoppingCartService cartService =
                 (ShoppingCartService) injector.getInstance(ShoppingCartService.class);
@@ -113,8 +114,8 @@ public class Main {
         cartService.addSession(movieSessionThree, userTwo);
         cartService.addSession(movieSessionFirst, userTwo);
 
-        System.out.println(cartService.getByUser(userOne));
-        System.out.println(cartService.getByUser(userTwo));
+        log.info(cartService.getByUser(userOne));
+        log.info(cartService.getByUser(userTwo));
 
         OrderService orderService = (OrderService) injector.getInstance(OrderService.class);
         List<Ticket> arrayListTicketsUserOne =
@@ -131,7 +132,7 @@ public class Main {
         cartService.addSession(movieSessionTwo, userOne);
         cartService.addSession(movieSessionTwo, userOne);
 
-        orderService.getOrderHistory(userOne).forEach(System.out::println);
-        orderService.getOrderHistory(userTwo).forEach(System.out::println);
+        log.info("Get order history user One " + orderService.getOrderHistory(userOne));
+        log.info("Get order history for user Two " + orderService.getOrderHistory(userTwo));
     }
 }
