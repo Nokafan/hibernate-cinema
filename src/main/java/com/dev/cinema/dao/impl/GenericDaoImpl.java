@@ -19,6 +19,7 @@ public abstract class GenericDaoImpl<T> implements GenericDao<T> {
             transaction = session.beginTransaction();
             session.save(entity);
             transaction.commit();
+            log.info("Insert successful for " + entity);
             return entity;
         } catch (Exception e) {
             if (transaction != null) {
