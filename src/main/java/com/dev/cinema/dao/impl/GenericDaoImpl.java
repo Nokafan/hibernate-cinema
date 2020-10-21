@@ -2,20 +2,30 @@ package com.dev.cinema.dao.impl;
 
 import com.dev.cinema.dao.GenericDao;
 import com.dev.cinema.exeption.DataProcessingExeption;
-import com.dev.cinema.util.HibernateUtil;
 import lombok.extern.log4j.Log4j;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 @Log4j
+@Repository
 public abstract class GenericDaoImpl<T> implements GenericDao<T> {
+    protected SessionFactory sessionFactory;
+
+    @Autowired
+    public GenericDaoImpl(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
+
     @Override
     public T add(T entity) {
         log.info("Сalling method add for " + entity);
         Transaction transaction = null;
         Session session = null;
         try {
-            session = HibernateUtil.getSessionFactory().openSession();
+            session = sessionFactory.openSession();
             transaction = session.beginTransaction();
             session.save(entity);
             transaction.commit();
