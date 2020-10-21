@@ -19,7 +19,7 @@ import lombok.NoArgsConstructor;
 public class MovieSession {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "session_id")
+    @Column(name = "id")
     private Long id;
 
     @ManyToOne

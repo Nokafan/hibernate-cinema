@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 public class Movie {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "movie_id")
+    @Column(name = "id")
     private Long id;
 
     @Column(name = "movie_title", nullable = false, unique = true)
