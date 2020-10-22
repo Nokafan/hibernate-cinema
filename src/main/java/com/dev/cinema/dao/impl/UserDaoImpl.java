@@ -2,21 +2,25 @@ package com.dev.cinema.dao.impl;
 
 import com.dev.cinema.dao.UserDao;
 import com.dev.cinema.exeption.DataProcessingExeption;
-import com.dev.cinema.lib.Dao;
 import com.dev.cinema.model.User;
-import com.dev.cinema.util.HibernateUtil;
 import java.util.Optional;
 import lombok.extern.log4j.Log4j;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.stereotype.Repository;
 
 @Log4j
-@Dao
+@Repository
 public class UserDaoImpl extends GenericDaoImpl<User> implements UserDao {
+    public UserDaoImpl(SessionFactory sessionFactory) {
+        super(sessionFactory);
+    }
+
     @Override
     public Optional<User> findByEmail(String email) {
         log.info("Calling method findByEmail() from UserDaoImpl");
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+        try (Session session = sessionFactory.openSession()) {
             return session.createQuery(
                     "FROM User u "
                             + "WHERE u.email = :email", User.class)
