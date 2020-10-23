@@ -1,7 +1,7 @@
 package com.dev.cinema.controllers;
 
 import com.dev.cinema.dto.moviesession.MovieSessionRequestDto;
-import com.dev.cinema.dto.moviesession.MovieSessionResponceDto;
+import com.dev.cinema.dto.moviesession.MovieSessionResponseDto;
 import com.dev.cinema.mapper.MovieSessionMapper;
 import com.dev.cinema.service.MovieSessionService;
 import java.time.LocalDate;
@@ -29,7 +29,7 @@ public class MovieSessionController {
     }
 
     @GetMapping("/available")
-    public List<MovieSessionResponceDto> getAvailableMovieSessions(
+    public List<MovieSessionResponseDto> getAvailableMovieSessions(
             @RequestParam Long movieId,
             @RequestParam @DateTimeFormat(pattern = "dd.MM.yyyy") LocalDate date) {
         return movieSessionService.findAvailableSessions(movieId, date)

@@ -1,7 +1,7 @@
 package com.dev.cinema.controllers;
 
 import com.dev.cinema.dto.movie.MovieRequestDto;
-import com.dev.cinema.dto.movie.MovieResponceDto;
+import com.dev.cinema.dto.movie.MovieResponseDto;
 import com.dev.cinema.mapper.MovieMapper;
 import com.dev.cinema.service.MovieService;
 import java.util.List;
@@ -32,7 +32,7 @@ public class MovieController {
     }
 
     @GetMapping
-    public List<MovieResponceDto> getAll() {
+    public List<MovieResponseDto> getAll() {
         return movieService.getAll()
                 .stream()
                 .map(mapper::movieToMovieDto)
@@ -40,7 +40,7 @@ public class MovieController {
     }
 
     @GetMapping("/{id}")
-    public MovieResponceDto getMovie(@PathVariable Long id) {
+    public MovieResponseDto getMovie(@PathVariable Long id) {
         return mapper.movieToMovieDto(movieService.get(id));
     }
 }

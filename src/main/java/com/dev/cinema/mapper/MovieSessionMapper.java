@@ -1,7 +1,7 @@
 package com.dev.cinema.mapper;
 
 import com.dev.cinema.dto.moviesession.MovieSessionRequestDto;
-import com.dev.cinema.dto.moviesession.MovieSessionResponceDto;
+import com.dev.cinema.dto.moviesession.MovieSessionResponseDto;
 import com.dev.cinema.model.MovieSession;
 import com.dev.cinema.service.CinemaHallService;
 import com.dev.cinema.service.MovieService;
@@ -30,8 +30,8 @@ public class MovieSessionMapper {
         return movieSession;
     }
 
-    public MovieSessionResponceDto fromMovieSessionToDto(MovieSession movieSession) {
-        MovieSessionResponceDto sessionDto = new MovieSessionResponceDto();
+    public MovieSessionResponseDto fromMovieSessionToDto(MovieSession movieSession) {
+        MovieSessionResponseDto sessionDto = new MovieSessionResponseDto();
         sessionDto.setId(movieSession.getId());
         sessionDto.setMovie(movieSession.getMovie());
         sessionDto.setCinemaHall(movieSession.getCinemaHall());
