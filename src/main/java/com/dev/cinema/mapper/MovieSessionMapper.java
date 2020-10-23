@@ -33,9 +33,10 @@ public class MovieSessionMapper {
     public MovieSessionResponseDto fromMovieSessionToDto(MovieSession movieSession) {
         MovieSessionResponseDto sessionDto = new MovieSessionResponseDto();
         sessionDto.setId(movieSession.getId());
-        sessionDto.setMovie(movieSession.getMovie());
-        sessionDto.setCinemaHall(movieSession.getCinemaHall());
-        sessionDto.setTime(movieSession.getTime());
+        sessionDto.setMovieId(movieSession.getMovie().getId());
+        sessionDto.setMovieTittle(movieSession.getMovie().getTitle());
+        sessionDto.setCinemaHallId(movieSession.getCinemaHall().getId());
+        sessionDto.setDateTime(movieSession.getTime().toString());
         return sessionDto;
     }
 }
