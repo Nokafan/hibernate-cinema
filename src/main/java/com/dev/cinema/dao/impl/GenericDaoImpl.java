@@ -40,4 +40,11 @@ public abstract class GenericDaoImpl<T> implements GenericDao<T> {
             }
         }
     }
+
+    public T get(Class<T> clazz, Long id) {
+        log.info("Сalling method get for " + clazz.getSimpleName() + " id=" + id);
+        try (Session session = sessionFactory.openSession()) {
+            return session.get(clazz, id);
+        }
+    }
 }

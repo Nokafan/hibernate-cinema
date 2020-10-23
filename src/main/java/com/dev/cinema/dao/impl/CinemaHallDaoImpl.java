@@ -25,6 +25,11 @@ public class CinemaHallDaoImpl extends GenericDaoImpl<CinemaHall> implements Cin
     }
 
     @Override
+    public CinemaHall get(Long id) {
+        return super.get(CinemaHall.class, id);
+    }
+
+    @Override
     public List<CinemaHall> getAll() {
         log.info("Calling method getAll() at CinemaHallDaoImp");
         try (Session session = sessionFactory.openSession()) {

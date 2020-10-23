@@ -23,6 +23,11 @@ public class MovieDaoImpl extends GenericDaoImpl<Movie> implements MovieDao {
     }
 
     @Override
+    public Movie get(Long id) {
+        return super.get(Movie.class, id);
+    }
+
+    @Override
     public List<Movie> getAll() {
         log.info("Callig method getAll() from MovieDaoImpl");
         try (Session session = super.sessionFactory.openSession()) {

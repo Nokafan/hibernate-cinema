@@ -15,4 +15,9 @@ public class TicketDaoImpl extends GenericDaoImpl<Ticket> implements TicketDao {
     public Ticket add(Ticket entity) {
         return super.add(entity);
     }
+
+    @Override
+    public Ticket get(Long id) {
+        return super.get(Ticket.class, id);
+    }
 }

@@ -24,6 +24,11 @@ public class OrderDaoImpl extends GenericDaoImpl<Order> implements OrderDao {
     }
 
     @Override
+    public Order get(Long id) {
+        return super.get(Order.class, id);
+    }
+
+    @Override
     public List<Order> getOrderHistory(User user) {
         log.info("Calling method getOrderHistory() from OrderDaoImpl");
         try (Session session = sessionFactory.openSession()) {

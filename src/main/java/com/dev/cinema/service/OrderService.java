@@ -8,5 +8,7 @@ import java.util.List;
 public interface OrderService {
     Order completeOrder(List<Ticket> tickets, User user);
 
+    Order get(Long id);
+
     List<Order> getOrderHistory(User user);
 }

@@ -18,6 +18,11 @@ public class UserDaoImpl extends GenericDaoImpl<User> implements UserDao {
     }
 
     @Override
+    public User get(Long id) {
+        return super.get(User.class, id);
+    }
+
+    @Override
     public Optional<User> findByEmail(String email) {
         log.info("Calling method findByEmail() from UserDaoImpl");
         try (Session session = sessionFactory.openSession()) {
