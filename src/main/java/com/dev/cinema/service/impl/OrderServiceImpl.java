@@ -22,6 +22,11 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    public Order get(Long id) {
+        return orderDao.get(id);
+    }
+
+    @Override
     public Order completeOrder(List<Ticket> tickets, User user) {
         Order order = new Order();
         order.setUser(user);

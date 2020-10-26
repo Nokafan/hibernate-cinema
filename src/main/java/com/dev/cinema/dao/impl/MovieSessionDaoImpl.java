@@ -20,6 +20,11 @@ public class MovieSessionDaoImpl extends GenericDaoImpl<MovieSession> implements
     }
 
     @Override
+    public MovieSession get(Long id) {
+        return super.get(MovieSession.class, id);
+    }
+
+    @Override
     public List<MovieSession> findAvailableSessions(Long movieId, LocalDate date) {
         log.info("Calling method findAvailableSessions() from MovieSessionDaoImpl");
         try (Session session = sessionFactory.openSession()) {
