@@ -12,9 +12,10 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class MovieSessionMapper {
+    private static final DateTimeFormatter FORMATTER =
+            DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm");
     private final MovieService movieService;
     private final CinemaHallService hallService;
-    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm");
 
     @Autowired
     public MovieSessionMapper(MovieService movieService, CinemaHallService hallService) {
@@ -26,7 +27,7 @@ public class MovieSessionMapper {
         MovieSession movieSession = new MovieSession();
         movieSession.setMovie(movieService.get(requestDto.getMovieId()));
         movieSession.setCinemaHall(hallService.get(requestDto.getCinemaHallId()));
-        movieSession.setTime(LocalDateTime.parse(requestDto.getSessionTime(), formatter));
+        movieSession.setTime(LocalDateTime.parse(requestDto.getSessionTime(), FORMATTER));
         return movieSession;
     }
 
