@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 public class MovieSessionMapper {
     private final MovieService movieService;
     private final CinemaHallService hallService;
-    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm");
+    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm");
 
     @Autowired
     public MovieSessionMapper(MovieService movieService, CinemaHallService hallService) {
