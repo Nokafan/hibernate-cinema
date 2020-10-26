@@ -35,12 +35,12 @@ public class MovieController {
     public List<MovieResponseDto> getAll() {
         return movieService.getAll()
                 .stream()
-                .map(mapper::movieToMovieDto)
+                .map(mapper::movieToMovieResponseDto)
                 .collect(Collectors.toList());
     }
 
     @GetMapping("/{id}")
     public MovieResponseDto getMovie(@PathVariable Long id) {
-        return mapper.movieToMovieDto(movieService.get(id));
+        return mapper.movieToMovieResponseDto(movieService.get(id));
     }
 }

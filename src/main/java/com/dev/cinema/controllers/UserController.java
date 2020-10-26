@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/users")
 public class UserController {
-    private UserService userService;
-    private UserMapper userMapper;
+    private final UserService userService;
+    private final UserMapper userMapper;
 
     @Autowired
     public UserController(UserService userService, UserMapper userMapper) {
@@ -23,6 +23,6 @@ public class UserController {
 
     @GetMapping("/by-email")
     public UserResponseDto getByEmail(@RequestParam String email) {
-        return userMapper.fromUserToUserResponseDto(userService.findByEmail(email).get());
+        return userMapper.fromUserToUserResponseDto(userService.findByEmail(email).orElseThrow());
     }
 }

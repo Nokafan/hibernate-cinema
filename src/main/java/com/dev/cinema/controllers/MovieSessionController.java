@@ -9,8 +9,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,8 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/movie-sessions")
 public class MovieSessionController {
-    private MovieSessionMapper mapper;
-    private MovieSessionService movieSessionService;
+    private final MovieSessionMapper mapper;
+    private final MovieSessionService movieSessionService;
 
     @Autowired
     public MovieSessionController(MovieSessionMapper mapper,
@@ -28,7 +28,7 @@ public class MovieSessionController {
         this.movieSessionService = movieSessionService;
     }
 
-    @GetMapping("/available")
+    @PostMapping("/available")
     public List<MovieSessionResponseDto> getAvailableMovieSessions(
             @RequestParam Long movieId,
             @RequestParam @DateTimeFormat(pattern = "dd.MM.yyyy") LocalDate date) {
@@ -39,7 +39,7 @@ public class MovieSessionController {
     }
 
     @PostMapping
-    public void addMovieSession(MovieSessionRequestDto requestDto) {
+    public void addMovieSession(@RequestBody MovieSessionRequestDto requestDto) {
         movieSessionService.add(mapper.toMovieSessionFromDto(requestDto));
     }
 }
