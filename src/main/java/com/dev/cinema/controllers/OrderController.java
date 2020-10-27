@@ -3,6 +3,7 @@ package com.dev.cinema.controllers;
 import com.dev.cinema.dto.order.OrderRequestDto;
 import com.dev.cinema.dto.order.OrderResponseDto;
 import com.dev.cinema.mapper.OrderMapper;
+import com.dev.cinema.model.User;
 import com.dev.cinema.service.OrderService;
 import com.dev.cinema.service.ShoppingCartService;
 import com.dev.cinema.service.UserService;
@@ -37,9 +38,8 @@ public class OrderController {
 
     @PostMapping
     public void addOrder(@RequestBody OrderRequestDto requestDto) {
-        orderService.completeOrder(
-                shoppingCartService.get(requestDto.getUserId()).getTickets(),
-                userService.get(requestDto.getUserId()));
+        User user = userService.get(requestDto.getUserId());
+        orderService.completeOrder(shoppingCartService.getByUser(user).getTickets(), user);
     }
 
     @GetMapping
