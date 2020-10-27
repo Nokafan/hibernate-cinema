@@ -36,8 +36,8 @@ public class OrderController {
         this.orderMapper = orderMapper;
     }
 
-    @PostMapping
-    public void addOrder(@RequestBody OrderRequestDto requestDto) {
+    @PostMapping("/complete")
+    public void completeOrder(@RequestBody OrderRequestDto requestDto) {
         User user = userService.get(requestDto.getUserId());
         orderService.completeOrder(shoppingCartService.getByUser(user).getTickets(), user);
     }
