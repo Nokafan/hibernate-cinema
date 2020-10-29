@@ -1,7 +1,6 @@
 package com.dev.cinema;
 
 import com.dev.cinema.config.AppConfig;
-import com.dev.cinema.exeption.AuthenticationException;
 import com.dev.cinema.model.CinemaHall;
 import com.dev.cinema.model.Movie;
 import com.dev.cinema.model.MovieSession;
@@ -91,20 +90,6 @@ public class Main {
         AuthenticationService authenticationService = context.getBean(AuthenticationService.class);
         User userOne = authenticationService.register("userOne@ukr.net", "1234");
         User userTwo = authenticationService.register("userTwo@ukr.net", "1234");
-
-        User userOneLogged = null;
-        User userTwoLogged = null;
-        try {
-            userOneLogged = authenticationService.login("userOne@ukr.net", "1234");
-            userTwoLogged = authenticationService.login("userTwo@ukr.net", "1234");
-        } catch (AuthenticationException e) {
-            log.warn("Incorrect username or password " + e.getMessage());
-        }
-
-        log.info("userOne = " + userOne);
-        log.info(userTwo);
-        log.info(userOne.equals(userOneLogged));
-        log.info(userTwo.equals(userTwoLogged));
 
         ShoppingCartService cartService = context.getBean(ShoppingCartService.class);
         cartService.addSession(movieSessionFirst, userOne);

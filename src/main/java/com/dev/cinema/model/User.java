@@ -26,8 +26,4 @@ public class User {
     @ToString.Exclude
     @Column(name = "password", nullable = false)
     private String password;
-
-    @ToString.Exclude
-    @Column(name = "salt")
-    private byte[] salt;
 }

@@ -27,7 +27,7 @@ public class UserDaoImpl extends GenericDaoImpl<User> implements UserDao {
         log.info("Calling method findByEmail() from UserDaoImpl");
         try (Session session = sessionFactory.openSession()) {
             return session.createQuery(
-                    "FROM User u "
+                        "FROM User u "
                             + "WHERE u.email = :email", User.class)
                     .setParameter("email", email)
                     .uniqueResultOptional();
