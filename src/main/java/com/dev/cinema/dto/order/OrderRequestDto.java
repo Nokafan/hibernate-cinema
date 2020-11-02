@@ -1,10 +1,12 @@
 package com.dev.cinema.dto.order;
 
-import javax.validation.constraints.Positive;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import lombok.Data;
 
 @Data
 public class OrderRequestDto {
-    @Positive(message = "User id should be positive")
+    @NotNull(message = "User id can't be null")
+    @Min(value = 0, message = "User id should be >= 0")
     private Long userId;
 }
