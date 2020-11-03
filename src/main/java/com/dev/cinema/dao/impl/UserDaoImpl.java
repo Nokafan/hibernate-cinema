@@ -18,6 +18,11 @@ public class UserDaoImpl extends GenericDaoImpl<User> implements UserDao {
     }
 
     @Override
+    public User add(User entity) {
+        return super.add(entity);
+    }
+
+    @Override
     public User get(Long id) {
         return super.get(User.class, id);
     }
@@ -27,17 +32,13 @@ public class UserDaoImpl extends GenericDaoImpl<User> implements UserDao {
         log.info("Calling method findByEmail() from UserDaoImpl");
         try (Session session = sessionFactory.openSession()) {
             return session.createQuery(
-                        "FROM User u "
+                    "FROM User u "
+                            + "JOIN FETCH u.roles "
                             + "WHERE u.email = :email", User.class)
                     .setParameter("email", email)
                     .uniqueResultOptional();
         } catch (HibernateException e) {
             throw new DataProcessingExeption("Faild to get user with email = " + email, e);
         }
-    }
-
-    @Override
-    public User add(User entity) {
-        return super.add(entity);
     }
 }
