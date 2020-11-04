@@ -1,6 +1,6 @@
 package com.dev.cinema.model;
 
-import java.util.List;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -31,6 +31,6 @@ public class User {
 
     @ManyToMany
     @Column(name = "roles")
-    private List<Role> roles;
+    private Set<Role> roles;
 
 }

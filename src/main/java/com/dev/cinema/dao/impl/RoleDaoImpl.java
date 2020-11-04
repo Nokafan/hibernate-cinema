@@ -31,8 +31,8 @@ public class RoleDaoImpl extends GenericDaoImpl<Role> implements RoleDao {
         log.info("Calling method getRoleByName() at RoleDaoImpl");
         try (Session session = sessionFactory.openSession()) {
             return session.createQuery("FROM Role "
-                    + "WHERE name = :roleName", Role.class)
-                    .setParameter("roleName", roleName)
+                    + "WHERE roleName = :roleName", Role.class)
+                    .setParameter("roleName", Role.of(roleName).getRoleName())
                     .getSingleResult();
         } catch (HibernateException e) {
             throw new DataProcessingExeption("Can't get Role from DB", e);

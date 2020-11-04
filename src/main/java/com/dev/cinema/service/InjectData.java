@@ -2,20 +2,20 @@ package com.dev.cinema.service;
 
 import com.dev.cinema.model.Role;
 import com.dev.cinema.model.User;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class InjectData {
-    private final ShoppingCart roleService;
+    private final RoleService roleService;
     private final UserService userService;
     private final ShoppingCartService cartService;
 
     @Autowired
-    public InjectData(ShoppingCart roleService,
+    public InjectData(RoleService roleService,
                       UserService userService,
                       ShoppingCartService cartService) {
         this.roleService = roleService;
@@ -35,7 +35,7 @@ public class InjectData {
         User adminUser = new User();
         adminUser.setEmail("admin@i.ua");
         adminUser.setPassword("1234");
-        List<Role> roleSet = new ArrayList<>();
+        Set<Role> roleSet = new HashSet<>();
         roleSet.add(adminRole);
         roleSet.add(userRole);
         adminUser.setRoles(roleSet);
@@ -43,7 +43,7 @@ public class InjectData {
         User userUser = new User();
         userUser.setEmail("user@i.ua");
         userUser.setPassword("1234");
-        userUser.setRoles(List.of(userRole));
+        userUser.setRoles(Set.of(userRole));
 
         userService.add(adminUser);
         userService.add(userUser);

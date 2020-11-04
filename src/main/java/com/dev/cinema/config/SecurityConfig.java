@@ -12,6 +12,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private static final String ROLE_ADMIN = "ADMIN";
+    private static final String ROLE_USER = "USER";
     private final UserDetailsService userDetailsService;
     private final PasswordEncoder encoder;
 
@@ -29,20 +30,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .and()
-                .authorizeRequests()
+                .antMatchers("/registration").permitAll()
                 .antMatchers(HttpMethod.POST,
                         "/movies/**",
                         "/cinema-halls/**",
                         "/movie-sessions/**").hasRole(ROLE_ADMIN)
-                .antMatchers(HttpMethod.POST, "/registration").permitAll()
                 .antMatchers(HttpMethod.GET,
                         "/movie-sessions/available/**",
-                        "/movies/**",
-                        "/cinema-halls/**").permitAll()
+                                    "/movies/**",
+                                    "/cinema-halls/**").permitAll()
                 .antMatchers(HttpMethod.GET,
                         "/orders/**",
-                        "/shopping-carts").hasRole("USER")
+                        "/shopping-carts").hasRole(ROLE_USER)
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
