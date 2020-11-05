@@ -35,6 +35,7 @@ public class ShoppingCartDaoImpl extends GenericDaoImpl<ShoppingCart> implements
             return session.createQuery("FROM ShoppingCart sc "
                     + "LEFT JOIN FETCH sc.tickets "
                     + "JOIN FETCH sc.user "
+                    + "JOIN FETCH sc.user.roles "
                     + "WHERE sc.user = :user", ShoppingCart.class)
                     .setParameter("user", user)
                     .uniqueResult();
