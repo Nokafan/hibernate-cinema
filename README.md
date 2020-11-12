@@ -23,3 +23,6 @@ Configure Tomcat: Deployment — war_exploded, context address — "/"
 Maven is used as the packaging tool, and you need to enable the import all of the dependencies and plugins.
 
 Make sure that Annotation processors are enabled.
+
+**Author**
+https://github.com/Nokafan
